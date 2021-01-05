@@ -1,0 +1,22 @@
+#Turn on the rewriting engine
+#([0-9]+)
+#([a-zA-Z0-9-_]+)
+ReWriteEngine on
+
+# phải qua trang nav.php đổi href thành đoạn thay thế RewriteRule ^string$ page.php
+# truyền không có tham số
+RewriteRule ^trang_chu$ index.php
+RewriteRule ^lien_he$ lien_he.php
+RewriteRule ^gio_hang$ gio_hang.php
+RewriteRule ^dang_nhap$ dang_nhap.php
+RewriteRule ^san_pham$ san_pham.php
+RewriteRule ^dang_ky$ dang_ky.php
+
+#truyền có tham số
+RewriteRule ^([a-zA-Z0-9-_]+)/([0-9]+)_([0-9]+)$ product.php?ma_mon=$1
+
+#ErrorDocument 404 /web/404.html trang không tìm thấy
+#ErrorDocument 404 /web/404.html
+
+#ErrorDocument 403 /web/403.html lỗi truy cập thư mục không cho phép
+ErrorDocument 403 /web/403.html
