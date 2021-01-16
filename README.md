@@ -23,7 +23,18 @@ _______________Hướng dẫn sử dụng_______________________
 
 - vào trang chủ:
 ![alt text](media/head.png)
-
+![alt text](media/trang_chu_spkm.png)
+![alt text](media/trang_chu_spmn.png)
+![alt text](media/san_pham.png)
+![alt text](media/mua_sp.png)
+![alt text](media/tim_kiem.png)
+![alt text](media/trang_1_sp.png)
+![alt text](media/trang_2_sp.png)
+![alt text](media/lien_he.png)
+![alt text](media/gio_hang_rong.png)
+![alt text](media/gio_hang.png)
+![alt text](media/dang_ky.png)
+![alt text](media/dang_nhap.png)
 - vào trang sản phẩm
 
 
