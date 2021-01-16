@@ -1,5 +1,38 @@
 --- Web bán bánh (bakery store)---
 
+_______________Mục Tiêu______________________
+
+- tạo hoàn chỉnh trang web bán hàng đơn giản đầy đủ chức năng.
+- thành thạo công nghệ.
+
+_______________Công nghệ sử dụng___________________
+front end: html, css, js, bootctrap.
+back end: php.
+tạo server: xampp.
+database: php mysql.
+
+_______________Hướng dẫn cài đặt_________________________
+
+- cài xampp.
+- cài php >= 5.6.
+- cài file dữ liệu.
+
+_______________Hướng dẫn sử dụng_______________________
+
+- chạy trên trình duyệt: localhost/[đường dẫn chứa file]
+
+- vào trang chủ:
+![alt text](media/head.png)
+
+- vào trang sản phẩm
+
+
+_______________Demo vide__________________________
+
+
+https://drive.google.com/file/d/1S0FKgS4jcruF947iXDYx6PYRScCGqdLB/view?usp=sharing
+
+
 -- giới thiệu:
     - trang web bán hàng, dùng cho cửa hàng vừa và nhỏ, web có phần slide giới thiệu sản phẩm mới, phần menu, sau đó là phần content hiểu thị sản phẩm.
     - trang web gồm trang chủ, sản phẩm, liên hệ, giỏ hàng, đăng nhập, đăng ký.
