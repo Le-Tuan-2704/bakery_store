@@ -2,8 +2,8 @@
 include_once("models/database.php");
 $sql = "SELECT *,chiet_khau from bk_san_pham sp inner join bk_khuyen_mai km on sp.ma_khuyen_mai=km.ma_khuyen_mai ";
 $db = new database();
-$db->setQuery($sql);
-$san_pham = $db->loadAllRows();
+
+$san_pham = $db->pdo_query($sql, []);
 $tongsl = 0;
 $tongDg = 0;
 if (isset($_SESSION["giohang"])) {

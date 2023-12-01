@@ -1,84 +1,64 @@
 <?php
-require_once("config.php");
-class database{
-    protected $pdo = NULL;
-    protected $sql = '';
-    protected $sta = NULL;        
-    
-    public function database() {
-        try
-		{
-			$this->pdo = new PDO("mysql:host=".DB_HOST."; dbname=".DB_NAME,DB_USER,DB_PWD);
-			$this->pdo->query('set names "utf8"');
-		}
-		catch(PDOException $ex )
-		{
-			die($ex->getMessage());	
-		}
+class database
+{
+
+    public function pdo_get_connection()
+    {
+        $servername = 'localhost';
+        $dbname = 'bakery_store';
+        $username = 'root';
+        $pass = '';
+
+        try {
+            $con = new PDO("mysql:host=$servername;dbname=$dbname", $username, $pass);
+            $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $con;
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            echo $ex->getLine();
+            echo $ex->getFile();
+        }
     }
-    
-    public function setQuery($sql) {
-        $this->sql = $sql;
-    }
-    
-    // Hàm thực thi truy vấn
-    public function execute($options=array()) {
-        $this->sta = $this->pdo->prepare($this->sql);
-        if($options) {  // Nếu có $ options thì hệ thống sẽ là tham số truyền
-            for($i=0;$i<count($options);$i++) {
-                $this->sta->bindParam($i+1,$options[$i]);
+    //insert into loai(ten_loai) values(?), update,delete
+    public function pdo_execute($sql, $sql_args = [])
+    {
+        try {
+            $con = $this->pdo_get_connection();
+            if ($con) {
+                $stmt = $con->prepare($sql);
+                $stmt->execute($sql_args);
             }
+        } catch (PDOException $ex) {
+            throw $ex;
         }
-        $this->sta->execute();
-        return $this->sta;
     }
     
-    // Hàm tải dữ liệu trên bảng
-    public function loadAllRows($options=array()) {
-        if(!$options) {
-            if(!$result = $this->execute())
-                return false;
+    // truy vấn nhiều dữ liệu 
+    public function pdo_query($sql, $sql_args = [])
+    {
+        try {
+            $con = $this->pdo_get_connection();
+            $stmt = $con->prepare($sql);
+            $stmt->execute($sql_args);
+            $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $rows;
+        } catch (PDOException $ex) {
+            throw $ex;
         }
-        else {
-            if(!$result = $this->execute($options))
-                return false;
-        }
-        return $result->fetchAll(PDO::FETCH_OBJ);
     }
-    
-    // Hàm tải 1 dữ liệu trên bảng
-    public function loadRow($option=array()) {
-        if(!$option) {
-            if(!$result = $this->execute())
-                return false;
+
+
+    // truy vấn một dữ liệu
+    public function pdo_query_one($sql, $sql_args = [])
+    {
+        try {
+            $con = $this->pdo_get_connection();
+            $stmt = $con->prepare($sql);
+            $stmt->execute($sql_args);
+            $rows = $stmt->fetch(PDO::FETCH_OBJ);
+            return $rows;
+        } catch (PDOException $ex) {
+            throw $ex;
         }
-        else {
-            if(!$result = $this->execute($option))
-                return false;
-        }
-        return $result->fetch(PDO::FETCH_OBJ);
-    }
-    
-    // Hàm đếm bản ghi trên bảng
-    public function loadRecord($option=array()) {
-        if(!$option) {
-            if(!$result = $this->execute())
-                return false;
-        }
-        else {
-            if(!$result = $this->execute($option))
-                return false;
-        }
-        return $result->fetch(PDO::FETCH_COLUMN);
-    }
-    
-    public function getLastId() {
-        return $this->pdo->lastInsertId();
-    }
-    
-    public function disconnect() {
-        $this->sta=NULL;
-		$this->pdo = NULL;
     }
 }
-?>  
