@@ -30,6 +30,9 @@ $chu_de = $db->pdo_query($sql, []);
                     <li class="nav-item">
                         <a class="nav-link" href="gio_hang">Giỏ hàng</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="don_hang">Đơn hàng</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
 					<?php if (isset($_SESSION["ten_khach_hang"])) : ?>

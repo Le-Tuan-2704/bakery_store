@@ -8,6 +8,7 @@ ReWriteEngine on
 RewriteRule ^trang_chu$ index.php
 RewriteRule ^lien_he$ lien_he.php
 RewriteRule ^gio_hang$ gio_hang.php
+RewriteRule ^don_hang$ don_hang.php
 RewriteRule ^dang_nhap$ dang_nhap.php
 RewriteRule ^san_pham$ san_pham.php
 RewriteRule ^dang_ky$ dang_ky.php
