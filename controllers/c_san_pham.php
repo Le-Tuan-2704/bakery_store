@@ -20,6 +20,22 @@ class C_san_pham{
 		
 		$lst=$p->pageList($curpage,$pages);
 		$san_phams=$m_san_pham->Doc_san_pham($vt,$limit);
+
+		$san_pham = $m_san_pham->Doc_tat_ca_san_pham();
+		$tongsl = 0;
+		$tongDg = 0;
+		if (isset($_SESSION["giohang"])) {
+			// $tongsl = count($_SESSION["giohang"]);
+			foreach ($_SESSION["giohang"] as $k => $sl) {
+
+				foreach ($san_pham as $sp) {
+					if ($k == $sp->ma_san_pham) {
+						$tongDg += $sl * ($sp->don_gia - ($sp->don_gia * $sp->chiet_khau / 100));
+						$tongsl += $sl;
+					}
+				}
+			}
+		}
 		
 		$title="BakeryStore | Sản phẩm";
 		$view="views/v_san_pham.php";

@@ -1,5 +1,7 @@
 <?php
 @session_start();
+
+include("models/m_san_pham.php");
 class C_gio_hang
 {
 	function Xem_gio_hang()
@@ -21,9 +23,70 @@ class C_gio_hang
 			}
 		}
 
+
+		$m_san_pham=new M_san_pham();
+		$san_pham = $m_san_pham->Doc_san_pham();
+
+		$tongsl = 0;
+		$tongDg = 0;
+		if (isset($_SESSION["giohang"])) {
+			$tongsl = count($_SESSION["giohang"]);
+			foreach ($_SESSION["giohang"] as $k => $v) {
+				foreach ($san_pham as $sp) {
+					if ($k == $sp->ma_san_pham) {
+						$chiet_khau = $sp->chiet_khau;
+						$tongDg += $v * ($sp->don_gia - ($sp->don_gia * $sp->chiet_khau / 100));
+					}
+				}
+			}
+		}
+
 		$title = "Bakery | Giỏ hàng";
 		$view = "views/v_gio_hang.php";
 		include("views/include/layout_2.php");
+		return;
+	}
+
+	function Xac_nhan_gio_hang()
+	{
+		$gio_hang = $this->layGioHang();
+		if ($gio_hang) //Nếu có giỏ hàng
+		{
+			$gio_hang_san_pham = array();
+			foreach ($gio_hang as $key => $value) {
+				if (substr($key, 0, 1) == 't')
+					$gio_hang_san_pham[substr($key, 1, strlen($key) - 1)] = $value;
+				else
+					$gio_hang_san_pham[$key] = $value;
+			}
+			if ($gio_hang_san_pham) //Nếu có chọn sản phẩm
+			{
+				$_SESSION['gio_hang_san_pham'] = $gio_hang_san_pham;
+				$ds_san_pham = $this->lay_thong_tin_san_pham($gio_hang_san_pham);
+			}
+		}
+
+		$m_san_pham=new M_san_pham();
+		$san_pham = $m_san_pham->Doc_san_pham();
+
+		$tongsl = 0;
+		$tongDg = 0;
+		if (isset($_SESSION["giohang"])) {
+			$tongsl = count($_SESSION["giohang"]);
+			foreach ($_SESSION["giohang"] as $k => $v) {
+				foreach ($san_pham as $sp) {
+					if ($k == $sp->ma_san_pham) {
+						$chiet_khau = $sp->chiet_khau;
+						$tongDg += $v * ($sp->don_gia - ($sp->don_gia * $sp->chiet_khau / 100));
+					}
+				}
+			}
+		}
+
+		$title = "Bakery | Giỏ hàng";
+		$view = "views/v_gio_hang_xac_nhan.php";
+		include("views/include/layout_2.php");
+		return;
 	}
 
 	function layGioHang()

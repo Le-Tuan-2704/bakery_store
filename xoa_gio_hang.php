@@ -10,13 +10,11 @@ if(isset($_GET["id"])) // Xóa một
 	}	
 	else
 	{
-		session_destroy();
 		header("location:san_pham.php");
 	}
 }
 else
 {
-	session_destroy();
 	header("location:san_pham.php");
 }
 

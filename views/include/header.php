@@ -14,6 +14,9 @@
     <!-- Your existing stylesheets -->
     <link href="public/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="public/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Thêm dòng sau vào phần head của trang HTML của bạn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
 
 
 

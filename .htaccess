@@ -12,6 +12,7 @@ RewriteRule ^don_hang$ don_hang.php
 RewriteRule ^dang_nhap$ dang_nhap.php
 RewriteRule ^san_pham$ san_pham.php
 RewriteRule ^dang_ky$ dang_ky.php
+RewriteRule ^admin$ dang_nhap_admin.php
 
 #truyền có tham số
 RewriteRule ^([a-zA-Z0-9-_]+)/([0-9]+)_([0-9]+)$ product.php?ma_mon=$1

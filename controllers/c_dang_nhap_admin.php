@@ -1,11 +1,11 @@
 <?php
 @session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-include("models/m_khach_hang.php");
+include("models/m_nhan_vien.php");
 
 
-class C_dang_nhap{
-    function Hien_thi_dang_nhap()
+class C_dang_nhap_admin{
+    function Hien_thi_dang_nhap_admin()
     {
         if(isset($_POST["btnDangNhap"]))
         {
@@ -27,23 +27,24 @@ class C_dang_nhap{
 
 
 		$title = "Bakery | Đăng nhập";
-		$view = "views/v_dang_nhap.php";
+		$view = "views/v_dang_nhap_admin.php";
 		include("views/include/layout_2.php");
     }
 
-    function thoat_dang_nhap()
+    function thoat_dang_nhap_admin()
     {
         session_destroy();
-        header("location:dang_nhap.php");
+        header("location:dang_nhap_admin.php");
     }
 
     function luu_dang_nhap($ten, $mk)
     {
-        $m_khach_hang = new M_khach_hang();
-        $khach_hang = $m_khach_hang->Doc_khach_hang_theo_taikhoan_matkhau($ten, $mk);
-        if($khach_hang) {
-            $_SESSION['ten_dang_nhap'] = $khach_hang->ten_khach_hang;
-            $_SESSION['vai_tro'] = 'khach';
+        echo $ten.$mk;
+        $m_nhan_vien = new M_nhan_vien();
+        $nhan_vien = $m_nhan_vien->Doc_nhan_vien_theo_taikhoan_matkhau($ten, $mk);
+        if($nhan_vien) {
+            $_SESSION['ten_dang_nhap'] = $nhan_vien->ten_nhan_vien;
+            $_SESSION['vai_tro'] = 'admin';
         }
     }
 }

@@ -19,6 +19,11 @@ include("views/include/header.php");
     include("views/include/content.php");
     ?>
   </div>
+  <div>
+    <?php
+      include("views/include/footer.php");
+    ?>
+  </div>
 </body>
 
 </html>

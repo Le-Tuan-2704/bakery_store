@@ -13,13 +13,20 @@ class M_san_pham extends database
 		return $this->pdo_query($sql, []);
 	}
 
+	public function Doc_tat_ca_san_pham()
+	{
+		$sql = "SELECT *,chiet_khau from bk_san_pham inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai ";
+		
+		return $this->pdo_query($sql, []);
+	}
+
 	public function Doc_san_pham_theo_ma_san_pham($ma_san_pham)
 	{
 		$sql = "SELECT bk_san_pham.*,ten_chu_de,ten_nhan_vien,ten_khuyen_mai,ten_huong_vi, chiet_khau 
 				from bk_san_pham inner join bk_chu_de on bk_san_pham.ma_chu_de=bk_chu_de.ma_chu_de
-				inner join bk_nhan_vien on bk_san_pham.ma_nhan_vien=bk_nhan_vien.ma_nhan_vien
 				inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai
 				inner join bk_huong_vi on bk_san_pham.id=bk_huong_vi.id
+				left join bk_nhan_vien on bk_san_pham.ma_nhan_vien=bk_nhan_vien.ma_nhan_vien
 				where ma_san_pham=?";
 		
 		return $this->pdo_query_one($sql, [$ma_san_pham]);
@@ -104,8 +111,7 @@ class M_san_pham extends database
 	}
 	public function lay_san_pham_cho_gio_hang($chuoi)
 	{
-		$query = "SELECT * from bk_san_pham where ma_san_pham in($chuoi)";
-
-		return $this->pdo_query($sql, []);
+		$query = "SELECT * from bk_san_pham where ma_san_pham in ($chuoi)";
+		return $this->pdo_query($query, []);
 	}
 }
