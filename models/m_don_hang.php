@@ -8,6 +8,18 @@ class M_don_hang extends database {
         return $this->pdo_query($sql, []);
     }
 
+    function Doc_don_hang_theo_khach_hang($ma_khach_hang) {
+        $sql = "SELECT * FROM bk_don_hang WHERE ma_khach_hang = ? Order By trang_thai";
+        
+        return $this->pdo_query($sql, [$ma_khach_hang]);
+    }
+
+    function Doc_chi_tiet_don_hang($ma_don_hang) {
+        $sql = "SELECT * FROM bk_chi_tiet_don_hang ctdh inner join bk_san_pham sp on ctdh.ma_san_pham = sp.ma_san_pham WHERE ma_don_hang = ?";
+        
+        return $this->pdo_query($sql, [$ma_don_hang]);
+    }
+
     function Doc_don_hang_theo_taikhoan_matkhau($username, $password) {
         $sql = "SELECT * FROM bk_don_hang WHERE username=? AND password=?";
         
@@ -27,7 +39,7 @@ class M_don_hang extends database {
         return $this->pdo_execute($sql,[$ma_san_pham, $ma_don_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $ngay_dat_hang, $ngay_giao_hang, $trang_thai, $tong_gia, $ghi_chu]);
     }
 
-    function themChiTietHoaDon($ma_don_hang, $ma_san_pham, $so_luong, $don_gia) {
+    function them_chi_tiet_hoa_don($ma_don_hang, $ma_san_pham, $so_luong, $don_gia) {
         $sql = "INSERT INTO bk_chi_tiet_don_hang (ma_don_hang, ma_san_pham, so_luong, don_gia) VALUES (?, ?, ?, ?)";
         
         return $this->pdo_execute($sql,[$ma_don_hang, $ma_san_pham, $so_luong, $don_gia]);

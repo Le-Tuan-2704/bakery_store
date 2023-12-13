@@ -28,11 +28,11 @@ $chu_de = $db->pdo_query($sql, []);
                         <a class="nav-link" href="lien_he">Liên hệ</a>
                     </li>
                     
-                    <?php if (isset($_SESSION["vai_tro"]) && $_SESSION["vai_tro"] =='admin') :?>
                     <li class="nav-item <?php echo (basename($_SERVER['REQUEST_URI']) == 'don_hang') ? 'active' : ''; ?>">
                         <a class="nav-link" href="don_hang">Đơn hàng</a>
                     </li>
-                    <?php else : ?>
+
+                    <?php if (isset($_SESSION["vai_tro"]) && $_SESSION["vai_tro"] =='khach') :?>
                     <li class="nav-item <?php echo (basename($_SERVER['REQUEST_URI']) == 'gio_hang') ? 'active' : ''; ?>">
                         <a class="nav-link" href="gio_hang">Giỏ hàng</a>
                     </li>

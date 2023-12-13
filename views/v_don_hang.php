@@ -1,90 +1,76 @@
-<div>
+<div class="container mt-4">
+<h2>Đơn hàng</h2>
 
-    <h1 class="mt-4 mb-4">Quản lý đơn hàng</h1>
+    <?php
+        foreach ($orderBakery as $oB) {
+    ?>
+    <!-- Collapse container -->
+    <div class=" mt-3" >
+        <div class="card card-body">
 
-    <!-- Đơn hàng chờ xác nhận -->
-    <div>
-        <h2>Đơn hàng chờ xác nhận (1)</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID Đơn hàng</th>
-                    <th>Chi tiết đơn hàng</th>
-                    <th>Xác nhận đơn</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orderBakery as $order) : ?>
-                    <?php if ($order['trang_thai'] == 'Chờ xác nhận') : ?>
+            <!-- Thông tin đơn hàng -->
+            <div class = 'd-flex justify-content-between'>
+                <h4>Thông tin đơn hàng</h4>
+                <h4>Mã khách hàng: <strong><?php echo $oB->ma_khach_hang; ?></strong></h4>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Mã Đơn Hàng:</strong> <?php echo $oB->ma_don_hang; ?></p>
+                    <p><strong>Họ Tên Người Nhận:</strong> <?php echo $oB->ho_ten_nguoi_nhan; ?></p>
+                    <p><strong>Số Điện Thoại:</strong> <?php echo $oB->sdt_nguoi_nhan; ?></p>
+                    <p><strong>Địa Chỉ Giao Hàng:</strong> <?php echo $oB->dia_diem_giao; ?></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Ngày Đặt Hàng:</strong> <?php echo $oB->ngay_dat_hang; ?></p>
+                    <p><strong>Ngày Giao Hàng:</strong> <?php echo $oB->ngay_giao_hang; ?></p>
+                    <p><strong>Trạng Thái:</strong> <?php echo $oB->trang_thai; ?></p>
+                    <p><strong>Tổng Giá:</strong> <?php echo number_format($oB->tong_gia); ?>&nbsp;đồng</p>
+                </div>
+            </div>
+            <div><p><strong>Ghi Chú:</strong> <?php echo $oB->ghi_chu; ?></p></div>
+
+            <div>
+                <!-- Button trigger collapse cho chi tiết đơn hàng -->
+                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseOrderDetails<?php echo $oB->ma_don_hang; ?>" aria-expanded="false" aria-controls="collapseOrderDetails<?php echo $oB->ma_don_hang; ?>">
+                    Xem Chi Tiết Đơn Hàng
+                </button>
+            </div>
+
+            <!-- Collapse container cho chi tiết đơn hàng -->
+            <div class="collapse mt-3" id="collapseOrderDetails<?php echo $oB->ma_don_hang; ?>">
+                <div class="card card-body">
+                    <h4>Chi tiết đơn hàng</h4>
+                    <table class="table">
+                    <thead>
                         <tr>
-                            <td><?= $order['ma_don_hang']; ?></td>
-                            <td><?= $order['chi_tiet_don_hang']; ?></td>
-                            <td><button class="btn btn-primary" onclick="confirmOrder(<?= $order['ma_don_hang']; ?>)">Xác nhận</button></td>
+                            <th>Mã Sản Phẩm</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Số Lượng</th>
+                            <th>Đơn Giá</th>
                         </tr>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Đơn hàng đang thực hiện -->
-    <div>
-        <h2>Đơn hàng đang thực hiện (2)</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID Đơn hàng</th>
-                    <th>Chi tiết đơn hàng</th>
-                    <th>Xác nhận xong</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orderBakery as $order) : ?>
-                    <?php if ($order['trang_thai'] == 'Đang thực hiện') : ?>
+                    </thead>
+                    <tbody>
+                        <?php
+                            foreach ($oB->chi_tiet as $chi_tiet_dh) {
+                        ?>
                         <tr>
-                            <td><?= $order['ma_don_hang']; ?></td>
-                            <td><?= $order['chi_tiet_don_hang']; ?></td>
-                            <td><button class="btn btn-success" onclick="completeOrder(<?= $order['ma_don_hang']; ?>)">Hoàn thành</button></td>
+                            <td><?php echo $chi_tiet_dh->ma_san_pham; ?></td>
+                            <td><?php echo $chi_tiet_dh->ten_san_pham; ?></td>
+                            <td><?php echo $chi_tiet_dh->so_luong; ?></td>
+                            <td><?php echo number_format($chi_tiet_dh->don_gia); ?>&nbsp;đồng</td>
                         </tr>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+                        <?php
+						    }
+						?>
+                    </tbody>
+                </table>
+                </div>
+            </div>
 
-    <!-- Đơn hàng đã giao và hoàn tất -->
-    <div>
-        <h2>Đơn hàng đã giao và hoàn tất (3)</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID Đơn hàng</th>
-                    <th>Chi tiết đơn hàng</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orderBakery as $order) : ?>
-                    <?php if ($order['trang_thai'] == 'Đã giao và hoàn tất') : ?>
-                        <tr>
-                            <td><?= $order['ma_don_hang']; ?></td>
-                            <td><?= $order['chi_tiet_don_hang']; ?></td>
-                        </tr>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        </div>
     </div>
-
-    <script>
-        function confirmOrder(orderId) {
-            // Xử lý xác nhận đơn hàng
-            alert('Xác nhận đơn hàng ' + orderId);
+    <?php
         }
-
-        function completeOrder(orderId) {
-            // Xử lý hoàn thành đơn hàng
-            alert('Hoàn thành đơn hàng ' + orderId);
-        }
-    </script>
-
+    ?>
 </div>

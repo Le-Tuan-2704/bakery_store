@@ -43,6 +43,7 @@ class C_dang_nhap_admin{
         $m_nhan_vien = new M_nhan_vien();
         $nhan_vien = $m_nhan_vien->Doc_nhan_vien_theo_taikhoan_matkhau($ten, $mk);
         if($nhan_vien) {
+            $_SESSION['ma_dang_nhap'] = $nhan_vien->ma_nhan_vien;
             $_SESSION['ten_dang_nhap'] = $nhan_vien->ten_nhan_vien;
             $_SESSION['vai_tro'] = 'admin';
         }

@@ -42,6 +42,7 @@ class C_dang_nhap{
         $m_khach_hang = new M_khach_hang();
         $khach_hang = $m_khach_hang->Doc_khach_hang_theo_taikhoan_matkhau($ten, $mk);
         if($khach_hang) {
+            $_SESSION['ma_dang_nhap'] = $khach_hang->ma_khach_hang;
             $_SESSION['ten_dang_nhap'] = $khach_hang->ten_khach_hang;
             $_SESSION['vai_tro'] = 'khach';
         }

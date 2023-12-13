@@ -39,17 +39,15 @@
 					</div>
 				</div>
 			</div>
-			<?php
-			if (!isset($_SESSION["ten_dang_nhap"])) {
-			?>
-				<a class="order btn btn-success btn-block mt-4" href="dang_nhap" onclick="">ĐẶT HÀNG</a>
-			<?php
-			} else {
-			?>
-				<a class="order btn btn-success btn-block mt-4" onclick="window.location.href = 'mua_hang.php?key=dat-hang'">ĐẶT HÀNG</a>
+				<form action="don_hang" method="post">
+					<!-- Trường ẩn action -->
+    				<input type="hidden" name="action" value="xac_nhan">
+					<!-- Nút submit -->
+					<button type="submit" class="btn btn-success btn-block mt-4">ĐẶT HÀNG</button>
+				</form>
+				
 		<?php
 			}
-		}
 		?>
 	</div>
 
