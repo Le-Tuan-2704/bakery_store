@@ -24,17 +24,42 @@
                 <div class="col-md-6">
                     <p><strong>Ngày Đặt Hàng:</strong> <?php echo $oB->ngay_dat_hang; ?></p>
                     <p><strong>Ngày Giao Hàng:</strong> <?php echo $oB->ngay_giao_hang; ?></p>
-                    <p><strong>Trạng Thái:</strong> <?php echo $oB->trang_thai; ?></p>
+                    <p><strong>Trạng Thái:</strong> <?php echo $this->hien_thi_trang_thai($oB->trang_thai); ?></p>
                     <p><strong>Tổng Giá:</strong> <?php echo number_format($oB->tong_gia); ?>&nbsp;đồng</p>
                 </div>
             </div>
             <div><p><strong>Ghi Chú:</strong> <?php echo $oB->ghi_chu; ?></p></div>
 
-            <div>
+            <div class= "d-flex flex-row-reverse">
                 <!-- Button trigger collapse cho chi tiết đơn hàng -->
-                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseOrderDetails<?php echo $oB->ma_don_hang; ?>" aria-expanded="false" aria-controls="collapseOrderDetails<?php echo $oB->ma_don_hang; ?>">
+                <button class="btn btn-info ml-2" type="button" data-toggle="collapse" data-target="#collapseOrderDetails<?php echo $oB->ma_don_hang; ?>" aria-expanded="false" aria-controls="collapseOrderDetails<?php echo $oB->ma_don_hang; ?>">
                     Xem Chi Tiết Đơn Hàng
                 </button>
+                <?php
+                    if (($oB->ma_don_hang != 9 || $oB->ma_don_hang != 255)
+                        || (isset($_SESSION["vai_tro"]) && $_SESSION["vai_tro"] == "khach" && ($oB->ma_don_hang == 1 || $oB->ma_don_hang == 2))) {
+                ?>
+                <form action="don_hang" method="post">
+                    <input type="hidden" name="action" value="huy_don_hang">
+                    <input type="hidden" name="trang_thai" value="<?php echo $oB->trang_thai; ?>">
+                    <button class="btn btn-danger ml-2" type="submit">
+                        Hủy
+                    </button>
+                </form>
+                    
+                <?php
+                    }
+                ?>
+                <form action="don_hang" method="post">
+                    <input type="hidden" name="action" value="thay_doi_trang_thai">
+                    <input type="hidden" name="trang_thai" value="<?php echo $oB->trang_thai; ?>">
+                    <button class="btn btn-success ml-2" type="submit">
+                        <?php 
+                            $this->hien_thi_trang_thai_btn($oB->trang_thai);
+                        ?>
+                    </button>
+                </form>
+                
             </div>
 
             <!-- Collapse container cho chi tiết đơn hàng -->

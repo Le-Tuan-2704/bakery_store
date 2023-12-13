@@ -100,5 +100,58 @@ class C_don_hang
 		}
 		return $ds_san_pham_gio_hang;
 	}
+
+	function hien_thi_trang_thai($trang_thai){
+		switch ($trang_thai) {
+			case 1:
+				echo "Chưa nhận đơn";
+				break;
+
+			case 2:
+				echo "Nhận đơn";
+				break;
+			case 3:
+				echo "Đang làm";
+				break;
+			case 5:
+				echo "Đã giao";
+				break;
+			case 9:
+				echo "Hủy";
+				break;
+			case 255:
+				echo "Thành đơn";
+				break;
+			default:
+				# code...
+				break;
+		}
+	}
+
+	function hien_thi_trang_thai_btn($trang_thai){
+		switch ($trang_thai) {
+			case 1:
+				echo "Xác nhận";
+				break;
+			case 2:
+				echo "Làm bánh";
+				break;
+			case 3:
+				echo "Hoàn thành";
+				break;
+			case 5:
+				echo "Đã giao";
+				break;
+			case 9:
+				echo "Hủy";
+				break;
+			case 255:
+				echo "Thành đơn";
+				break;
+			default:
+				# code...
+				break;
+		} 
+	}
 }
 ?>
