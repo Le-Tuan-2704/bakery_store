@@ -39,7 +39,6 @@ class C_dang_nhap_admin{
 
     function luu_dang_nhap($ten, $mk)
     {
-        echo $ten.$mk;
         $m_nhan_vien = new M_nhan_vien();
         $nhan_vien = $m_nhan_vien->Doc_nhan_vien_theo_taikhoan_matkhau($ten, $mk);
         if($nhan_vien) {
