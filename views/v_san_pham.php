@@ -1,4 +1,5 @@
 
+
 <div class="product-model">
     
     <p align="right">Giỏ hàng của bạn:(<?php echo "$tongsl sản phẩm - Tổng thành tiền: " . number_format($tongDg) . " đồng" ?> )
@@ -10,6 +11,89 @@
         }
     ?>
     <br>
+    <div class="d-flex flex-row-reverse">
+        <!-- Nút để mở Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal">
+            Thêm Sản Phẩm
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm Sản Phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form nhập thông tin sản phẩm -->
+                        <form id="addProductForm" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <!-- Các trường thông tin sản phẩm -->
+                                    <div class="form-group">
+                                        <label for="ten_san_pham">Tên Sản Phẩm:</label>
+                                        <input type="text" class="form-control" id="ten_san_pham" name="ten_san_pham">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ma_chu_de">Mã Chủ Đề:</label>
+                                        <input type="text" class="form-control" id="ma_chu_de" name="ma_chu_de">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ma_khuyen_mai">Mã Khuyến Mãi:</label>
+                                        <input type="text" class="form-control" id="ma_khuyen_mai" name="ma_khuyen_mai">
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6">
+                                    <div class="form-group">
+                                        <label for="so_luong">Số lượng:</label>
+                                        <input type="text" class="form-control" id="so_luong" name="so_luong">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="don_gia">Đơn giá:</label>
+                                        <input type="text" class="form-control" id="don_gia" name="don_gia">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="hinh_anh">Hình Ảnh:</label>
+                                        <input type="file" class="form-control-file" id="hinh_anh" name="hinh_anh">
+                                    </div>
+
+                                    <!-- Thêm các trường khác tương tự -->
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class = "col-xl-12">
+                                    <div class="form-group">
+                                        <label for="noi_dung_tom_tat">Nội dung tóm tắt:</label>
+                                        <textarea class="form-control" id="noi_dung_tom_tat" name="noi_dung_tom_tat" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class = "col-xl-12">
+                                    <div class="form-group">
+                                        <label for="noi_dung_chi_tiet">Nội dung chi tiết:</label>
+                                        <textarea class="form-control" id="noi_dung_chi_tiet" name="noi_dung_chi_tiet" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                                
+                            <!-- Nút submit để thêm sản phẩm -->
+                            <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <br>
     <div class="row">
       <div class="col-lg-3">
@@ -71,7 +155,7 @@
                                   <div class="form-group mb-0">
                                       <input type="number" class="form-control item_quantity" value="1" name="sl_<?php echo $row->ma_san_pham ?>" id="sl_<?php echo $row->ma_san_pham ?>" />
                                   </div>
-                                  <a href="javascript:void(0)" class="btn btn-primary item_add items" onclick="chonmua(<?php echo $row->ma_san_pham ?>)"><i class="fas fa-shopping-cart"></i></a>
+                                  <button class="btn btn-primary item_add items" onclick="chonmua(<?php echo $row->ma_san_pham ?>)"><i class="fas fa-shopping-cart"></i></button>
                               </div>
                           </div>
                       </div>
