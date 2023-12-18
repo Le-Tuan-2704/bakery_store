@@ -8,8 +8,12 @@ if(isset($_SESSION["ten_dang_nhap"]))
     $c_don_hang=new C_don_hang();
 
     if (isset($_POST["action"]) && $_POST["action"] == "xac_nhan") {
-
-        $c_don_hang->dat_hang();
+        $ho_ten_nguoi_nhan = $_POST["ho_ten_nguoi_nhan"];
+        $sdt_nguoi_nhan = $_POST["sdt_nguoi_nhan"];
+        $dia_diem_giao = $_POST["dia_diem_giao"];
+        $ngay_giao_hang = $_POST["ngay_giao_hang"];
+        $ghi_chu = $_POST["ghi_chu"];
+        $c_don_hang->dat_hang($ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $ngay_giao_hang, $ghi_chu);
         return;
     }
 

@@ -5,7 +5,7 @@ class M_san_pham extends database
 {
 	public function Doc_san_pham($vt = -1, $limit = -1)
 	{
-		$sql = "SELECT *,chiet_khau from bk_san_pham inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai ";
+		$sql = "SELECT *,chiet_khau from bk_san_pham inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai Order by bk_san_pham.ngay_them_san_pham desc";
 		if ($vt >= 0 && $limit > 0) {
 			$sql .= " limit $vt,$limit ";
 		}
@@ -15,7 +15,7 @@ class M_san_pham extends database
 
 	public function Doc_tat_ca_san_pham()
 	{
-		$sql = "SELECT *,chiet_khau from bk_san_pham inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai ";
+		$sql = "SELECT *,chiet_khau from bk_san_pham inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai Order by bk_san_pham.ngay_them_san_pham desc";
 		
 		return $this->pdo_query($sql, []);
 	}
@@ -27,7 +27,8 @@ class M_san_pham extends database
 				inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai
 				inner join bk_huong_vi on bk_san_pham.id=bk_huong_vi.id
 				left join bk_nhan_vien on bk_san_pham.ma_nhan_vien=bk_nhan_vien.ma_nhan_vien
-				where ma_san_pham=?";
+				where ma_san_pham=?
+				Order by bk_san_pham.ngay_them_san_pham desc";
 		
 		return $this->pdo_query_one($sql, [$ma_san_pham]);
 	}
@@ -59,7 +60,7 @@ class M_san_pham extends database
 
 	public function Doc_san_pham_cung_chu_de($ma_chu_de, $ma_san_pham, $vt = -1, $limit = -1)
 	{
-		$sql = "SELECT * from bk_san_pham where ma_chu_de=? and ma_san_pham!=? ";
+		$sql = "SELECT * from bk_san_pham where ma_chu_de=? and ma_san_pham!=? Order by bk_san_pham.ngay_them_san_pham desc ";
 		if ($vt >= 0 && $limit > 0) {
 			$sql .= " limit $vt,$limit";
 		}
@@ -69,14 +70,14 @@ class M_san_pham extends database
 
 	public function Doc_khuyen_mai()
 	{
-		$sql = "SELECT * from bk_khuyen_mai group by chiet_khau";
+		$sql = "SELECT * from bk_khuyen_mai";
 		
 		return $this->pdo_query($sql, []);
 	}
 
 	public function Doc_huong_vi()
 	{
-		$sql = "SELECT * from bk_huong_vi group by ten_huong_vi";
+		$sql = "SELECT * from bk_huong_vi";
 		
 		return $this->pdo_query($sql, []);
 	}
@@ -85,7 +86,8 @@ class M_san_pham extends database
 	{
 		$sql = "SELECT *,chiet_khau from bk_san_pham 
 		inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai 
-		where ma_chu_de like '$ma_chu_de'";
+		where ma_chu_de like '$ma_chu_de'
+		Order by bk_san_pham.ngay_them_san_pham desc";
 		
 		
 		return $this->pdo_query($sql, []);
@@ -94,7 +96,8 @@ class M_san_pham extends database
 	{
 		$sql = "SELECT *,chiet_khau from bk_khuyen_mai 
 		inner join bk_san_pham on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai 
-		where chiet_khau like '$chiet_khau'";
+		where chiet_khau like '$chiet_khau'
+		Order by bk_san_pham.ngay_them_san_pham desc";
 
 		
 		return $this->pdo_query($sql, []);
@@ -104,14 +107,25 @@ class M_san_pham extends database
 		$sql = "SELECT *,ten_huong_vi,chiet_khau from bk_san_pham 
 		inner join bk_huong_vi on bk_san_pham.id=bk_huong_vi.id 
 		inner join bk_khuyen_mai on bk_san_pham.ma_khuyen_mai=bk_khuyen_mai.ma_khuyen_mai 
-		where ten_huong_vi like '$huong_vi'";
+		where ten_huong_vi like '$huong_vi'
+		Order by bk_san_pham.ngay_them_san_pham desc";
 
 		
 		return $this->pdo_query($sql, []);
 	}
 	public function lay_san_pham_cho_gio_hang($chuoi)
 	{
-		$query = "SELECT * from bk_san_pham where ma_san_pham in ($chuoi)";
+		$query = "SELECT * from bk_san_pham where ma_san_pham in ($chuoi) Order by bk_san_pham.ngay_them_san_pham desc";
 		return $this->pdo_query($query, []);
+	}
+
+	public function Them_san_pham($ten_san_pham, $ma_chu_de, $ma_khuyen_mai, $ma_nhan_vien, $so_luong, $don_gia, $hinh_anh, $noi_dung_tom_tat, $noi_dung_chi_tiet, $ngay_hien_tai)
+	{
+		$sql = "INSERT INTO bk_san_pham (ten_san_pham, ma_chu_de, ma_khuyen_mai, ma_nhan_vien, id, so_luong, don_gia, hinh_anh, noi_dung_tom_tat, noi_dung_chi_tiet, ngay_them_san_pham)
+				VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?)";
+		
+		$values = [$ten_san_pham, $ma_chu_de, $ma_khuyen_mai, $ma_nhan_vien, $so_luong, $don_gia, $hinh_anh, $noi_dung_tom_tat, $noi_dung_chi_tiet, $ngay_hien_tai];
+
+		return $this->pdo_execute($sql, $values);
 	}
 }

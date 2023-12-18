@@ -29,6 +29,7 @@ class M_khach_hang extends database {
 
     function Them_hoa_don($ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $ngay_dat_hang, $ngay_giao_hang, $trang_thai, $tong_gia, $ghi_chu) {
 
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $dateNow = date("Y-m-d H:i:s");
 
         $sql = "INSERT INTO bk_don_hang (ma_khach_hang, ho_ten_nguoi_nhan, sdt_nguoi_nhan, dia_diem_giao, ngay_dat_hang, ngay_giao_hang, trang_thai, tong_gia, ghi_chu) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";

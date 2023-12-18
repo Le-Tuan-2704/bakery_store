@@ -1,6 +1,24 @@
 <?php
 include("models/m_san_pham.php");
 class C_san_pham{
+
+	function Them_sp($ten_san_pham, $ma_chu_de, $ma_khuyen_mai, $so_luong, $don_gia, $hinh_anh, $noi_dung_tom_tat, $noi_dung_chi_tiet) {
+		// Đặt múi giờ theo Hà Nội
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		// Lấy ngày hiện tại
+		$ngay_hien_tai = date('Y-m-d');
+
+		$ma_nhan_vien = $_SESSION["ma_dang_nhap"];
+
+		$m_san_pham=new M_san_pham();
+		$m_san_pham->Them_san_pham($ten_san_pham, $ma_chu_de, $ma_khuyen_mai, $ma_nhan_vien, $so_luong, $don_gia, $hinh_anh, $noi_dung_tom_tat, $noi_dung_chi_tiet, $ngay_hien_tai);
+		header("location: san_pham");
+	}
+
+	function Sua_sp() {
+		
+	}
+
 	function Hien_thi_san_pham()
 	{
 		$m_san_pham=new M_san_pham();

@@ -507,7 +507,7 @@ a i.youtube {
 }
 
 .items {
-	margin: 10px 0 0px 17px;
+	margin: 0px 0px 0px 17px;
 }
 
 .item_add:hover {
@@ -1979,4 +1979,11 @@ label {
 
 a {
 	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.custom-img {
+    height: 190px !important;
+    width: 253px !important;
+    object-fit: cover;
 }

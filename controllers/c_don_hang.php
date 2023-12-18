@@ -6,7 +6,7 @@ include("models/m_khach_hang.php");
 class C_don_hang
 {
 
-	function dat_hang() {
+	function dat_hang($ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $ngay_giao_hang, $ghi_chu) {
 		$m_san_pham=new M_san_pham();
 		$m_khach_hang=new M_khach_hang();
 
@@ -45,9 +45,9 @@ class C_don_hang
 
 		$thong_tin_khach_hang = $m_khach_hang->Doc_khach_hang_theo_id($_SESSION["ma_dang_nhap"]);
 
-		$don_hang = $m_khach_hang->Them_hoa_don($thong_tin_khach_hang->ma_khach_hang, $thong_tin_khach_hang->ten_khach_hang, $thong_tin_khach_hang->sdt, $thong_tin_khach_hang->dia_chi, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), 1, $tongDg, 'ghi chú');
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$don_hang = $m_khach_hang->Them_hoa_don($thong_tin_khach_hang->ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, date("Y-m-d H:i:s"),  $ngay_giao_hang, 1, $tongDg, $ghi_chu);
 		
-
 		if (!empty($ds_san_pham)) {
             foreach ($ds_san_pham as $sp) {
 				$m_khach_hang->Them_chi_tiet_don_hang($don_hang->ma_don_hang, $sp->ma_san_pham, $sp->so_luong, $sp->don_gia - ($sp->don_gia * $sp->chiet_khau / 100));

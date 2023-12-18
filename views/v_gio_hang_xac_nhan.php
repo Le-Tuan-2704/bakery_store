@@ -1,55 +1,78 @@
-<div class="check-sec">
-    <div class="cart-total">
-		<?php
-		if (!empty($ds_san_pham)) {
-		?>
-			<div class="price-details">
-				<h4 style="color:red" class="text-center mb-4">Phiếu mua hàng</h4>
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th scope="col">Sản phẩm</th>
-							<th scope="col">Đơn giá</th>
-							<th scope="col">Số lượng</th>
-							<th scope="col">Thành tiền</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						foreach ($ds_san_pham as $sp) {
-						?>
-							<tr>
-								<td><?php echo $sp->ten_san_pham; ?></td>
-								<td><?php echo number_format($sp->don_gia - ($sp->don_gia * $chiet_khau / 100)); ?> đồng</td>
-								<td><?php echo $sp->so_luong; ?></td>
-								<td><?php echo number_format($sp->so_luong * ($sp->don_gia - ($sp->don_gia * $chiet_khau / 100))); ?> đồng</td>
-							</tr>
-						<?php
-						}
-						?>
-					</tbody>
-				</table>
-				<div class="d-flex justify-content-between">
-					<div style="width = 100px;">
-						<span>Số lượng sản phẩm: <?php echo count($_SESSION["giohang"]); ?></span>
-						<span>Phí giao hàng: 0</span>
-					</div>
-					<div class="text-right">
-						<h4 class="mb-3">Tổng cộng: <?php echo number_format($tongDg); ?> đồng</h4>
-					</div>
-				</div>
-			</div>
-				<form action="don_hang" method="post">
-					<!-- Trường ẩn action -->
-    				<input type="hidden" name="action" value="xac_nhan">
-					<!-- Nút submit -->
-					<button type="submit" class="btn btn-success btn-block mt-4">ĐẶT HÀNG</button>
-				</form>
-				
-		<?php
-			}
-		?>
-	</div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header text-center" style="color: red;">
+                    <h4>Phiếu mua hàng</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col">Đơn giá</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($ds_san_pham as $sp) : ?>
+                                <tr>
+                                    <td><?php echo $sp->ten_san_pham; ?></td>
+                                    <td><?php echo number_format($sp->don_gia - ($sp->don_gia * $chiet_khau / 100)); ?> đồng</td>
+                                    <td><?php echo $sp->so_luong; ?></td>
+                                    <td><?php echo number_format($sp->so_luong * ($sp->don_gia - ($sp->don_gia * $chiet_khau / 100))); ?> đồng</td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
 
-    <div class="clearfix"> </div>
+                    <div class="d-flex justify-content-between">
+                        <div >
+                            <p>Số lượng sản phẩm: <?php echo count($_SESSION["giohang"]); ?></p>
+                            
+                        </div>
+                        <div class="text-right">
+							<p>Phí giao hàng: <?php echo number_format(0); ?> đồng</p>
+                            <h4 class="mb-3">Tổng cộng: <?php echo number_format($tongDg + 0); ?> đồng</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form nhập thông tin người nhận -->
+                <div class="card-footer">
+                    <form action="don_hang" method="post">
+                        <input type="hidden" name="action" value="xac_nhan">
+
+                        <div class="form-group">
+                            <label for="ho_ten_nguoi_nhan">Họ tên người nhận:</label>
+                            <input type="text" class="form-control" id="ho_ten_nguoi_nhan" name="ho_ten_nguoi_nhan" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sdt_nguoi_nhan">Số điện thoại người nhận:</label>
+                            <input type="tel" class="form-control" id="sdt_nguoi_nhan" name="sdt_nguoi_nhan" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dia_diem_giao">Địa chỉ giao hàng:</label>
+                            <textarea class="form-control" id="dia_diem_giao" name="dia_diem_giao" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="thoi_gian_giao">Thời gian giao hàng:</label>
+                            <input type="datetime-local" class="form-control" id="thoi_gian_giao" name="thoi_gian_giao" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ghi_chu">Ghi chú:</label>
+                            <textarea class="form-control" id="ghi_chu" name="ghi_chu"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-block mt-4">ĐẶT HÀNG</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

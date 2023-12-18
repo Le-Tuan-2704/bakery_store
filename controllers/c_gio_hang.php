@@ -139,6 +139,8 @@ class C_gio_hang
 		$m_khach_hang = new M_khach_hang();
 		$ma_san_pham = array();
 		$ma_khach_hang = $ho_ten_nguoi_nhan = $sdt_nguoi_nhan = $dia_diem_giao = $ngay_giao_hang = $tong_gia = $ghi_chu = "";
+		// Đặt múi giờ theo Hà Nội
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
 		$ngay_dat_hang = date('Y-m-d');
 		$ma_san_pham = $ds_san_pham->ma_san_pham;
 		$trang_thai = 0;
