@@ -79,7 +79,10 @@ CREATE TABLE `bk_don_hang` (
   `ngay_giao_hang` datetime NOT NULL,
   `trang_thai` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `tong_gia` double NOT NULL,
-  `ghi_chu` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `ghi_chu` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `trang_thai_thanh_toan` int(11) NOT NULL,
+  `ma_thanh_toan` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `hinh_thuc_thanh_toan` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
