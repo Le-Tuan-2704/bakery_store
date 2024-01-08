@@ -10,7 +10,7 @@ class M_don_hang extends database {
                 AND (? = '' OR ngay_dat_hang = ?)
                 AND (? = '' OR ngay_giao_hang = ?)
                 AND (? = 0 OR trang_thai = ?)
-            ORDER BY trang_thai";
+            ORDER BY trang_thai, ngay_giao_hang";
         
         return $this->pdo_query($sql, [$searchTenKhachHang, 
                                         $searchMaDonHang, $searchMaDonHang, 
@@ -29,7 +29,7 @@ class M_don_hang extends database {
             AND (? = '' OR ngay_dat_hang = ?)
             AND (? = '' OR ngay_giao_hang = ?)
             AND (? = 0 OR trang_thai = ?)
-        Order By trang_thai";
+        Order By trang_thai, ngay_giao_hang DESC";
         
         return $this->pdo_query($sql, [$ma_khach_hang,
                                         $searchTenKhachHang, 

@@ -41,7 +41,7 @@
 
                 <!-- Form nhập thông tin người nhận -->
                 <div class="card-footer">
-                    <form action="don_hang" method="post">
+                    <form action="don_hang" method="post" id="orderForm">
                         <input type="hidden" name="action" value="xac_nhan">
 
                         <div class="form-group">
@@ -69,10 +69,42 @@
                             <textarea class="form-control" id="ghi_chu" name="ghi_chu"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-block mt-4">ĐẶT HÀNG</button>
+                        <button type="button" class="btn btn-success btn-block mt-4" data-toggle="modal" data-target="#confirmOrderModal">ĐẶT HÀNG</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Thêm Modal xác nhận -->
+<div class="modal fade" id="confirmOrderModal" tabindex="-1" role="dialog" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmOrderModalLabel">Xác nhận đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Cảm ơn bạn đã đặt hàng. Đơn hàng của bạn đã được xác nhận.</p>
+                <p>Chúng tôi sẽ liên hệ với bạn để xác nhận thông tin và giao hàng.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="confirmOrder()">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmOrder() {
+        // Thay đổi action của form để đưa đến trang xử lý khi xác nhận
+        document.getElementById('orderForm').action = 'don_hang';
+
+        // Submit form
+        document.getElementById('orderForm').submit();
+    }
+</script>

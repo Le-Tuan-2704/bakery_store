@@ -11,7 +11,7 @@ if(isset($_SESSION["ten_dang_nhap"]))
         $ho_ten_nguoi_nhan = $_POST["ho_ten_nguoi_nhan"];
         $sdt_nguoi_nhan = $_POST["sdt_nguoi_nhan"];
         $dia_diem_giao = $_POST["dia_diem_giao"];
-        $ngay_giao_hang = $_POST["ngay_giao_hang"];
+        $ngay_giao_hang = $_POST["thoi_gian_giao"];
         $ghi_chu = $_POST["ghi_chu"];
         $c_don_hang->dat_hang($ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $ngay_giao_hang, $ghi_chu);
         return;

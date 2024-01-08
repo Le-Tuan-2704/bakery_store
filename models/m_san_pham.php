@@ -128,4 +128,15 @@ class M_san_pham extends database
 
 		return $this->pdo_execute($sql, $values);
 	}
+
+	public function Sua_san_pham($ma_san_pham, $ten_san_pham, $ma_chu_de, $ma_khuyen_mai, $ma_nhan_vien, $so_luong, $don_gia, $hinh_anh, $noi_dung_tom_tat, $noi_dung_chi_tiet, $ngay_hien_tai)
+	{
+		$sql = "UPDATE bk_san_pham 
+				SET ten_san_pham = ?, ma_chu_de = ?, ma_khuyen_mai = ?, ma_nhan_vien = ?, so_luong = ?, don_gia = ?, hinh_anh = ?, noi_dung_tom_tat = ?, noi_dung_chi_tiet = ?, ngay_them_san_pham = ?
+				WHERE ma_san_pham = ?";
+		
+		$values = [$ten_san_pham, $ma_chu_de, $ma_khuyen_mai, $ma_nhan_vien, $so_luong, $don_gia, $hinh_anh, $noi_dung_tom_tat, $noi_dung_chi_tiet, $ngay_hien_tai, $ma_san_pham];
+
+		return $this->pdo_execute($sql, $values);
+	}
 }

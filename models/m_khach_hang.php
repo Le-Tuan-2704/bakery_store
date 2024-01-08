@@ -34,7 +34,7 @@ class M_khach_hang extends database {
 
         $sql = "INSERT INTO bk_don_hang (ma_khach_hang, ho_ten_nguoi_nhan, sdt_nguoi_nhan, dia_diem_giao, ngay_dat_hang, ngay_giao_hang, trang_thai, tong_gia, ghi_chu) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
-        $this->pdo_execute($sql,[$ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $dateNow, $dateNow, $trang_thai, $tong_gia, $ghi_chu]);
+        $this->pdo_execute($sql,[$ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $dateNow, $ngay_giao_hang, $trang_thai, $tong_gia, $ghi_chu]);
 
         $sql_select = "SELECT * FROM bk_don_hang WHERE ma_khach_hang = ? AND ngay_dat_hang = ?";
 
