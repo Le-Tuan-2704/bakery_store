@@ -69,7 +69,7 @@
                             <textarea class="form-control" id="ghi_chu" name="ghi_chu"></textarea>
                         </div>
 
-                        <button type="button" class="btn btn-success btn-block mt-4" data-toggle="modal" data-target="#confirmOrderModal">ĐẶT HÀNG</button>
+                        <button type="submit" class="btn btn-success btn-block mt-4" >ĐẶT HÀNG</button>
                     </form>
                 </div>
             </div>

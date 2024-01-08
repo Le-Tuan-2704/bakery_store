@@ -58,6 +58,12 @@ class M_don_hang extends database {
         return $this->pdo_query_one($sql, [$trang_thai, $ma_don_hang, $trang_thai_cu]);
     }
 
+    function Thay_doi_trang_thai_thanh_toan($ma_don_hang, $phuong_thuc)  {
+        $sql = "UPDATE bk_don_hang SET trang_thai_thanh_toan = ?, hinh_thuc_thanh_toan = ? WHERE ma_don_hang = ?";
+        
+        return $this->pdo_query_one($sql, [1, $phuong_thuc, $ma_don_hang]);
+    }
+
     function Them_don_hang($ten_don_hang, $dia_chi, $sdt, $gioi_tinh, $email, $username, $password, $so_tien) {
         $sql = "INSERT INTO bk_don_hang (ma_don_hang, ten_don_hang, dia_chi, sdt, gioi_tinh, email, username, password, so_tien) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
         

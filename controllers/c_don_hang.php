@@ -46,14 +46,19 @@ class C_don_hang
 		$thong_tin_khach_hang = $m_khach_hang->Doc_khach_hang_theo_id($_SESSION["ma_dang_nhap"]);
 
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
-		$don_hang = $m_khach_hang->Them_hoa_don($thong_tin_khach_hang->ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, date("Y-m-d H:i:s"),  $ngay_giao_hang, 1, $tongDg, $ghi_chu);
+
+		$trang_thai_thanh_toan = 0;
+		$ma_thanh_toan = $this->generateRandomString();
+		$hinh_thuc_thanh_toan = 'Tiền mặt';
+
+		$don_hang = $m_khach_hang->Them_hoa_don($thong_tin_khach_hang->ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, date("Y-m-d H:i:s"),  $ngay_giao_hang, 1, $tongDg, $ghi_chu, $trang_thai_thanh_toan, $ma_thanh_toan, $hinh_thuc_thanh_toan);
 		
 		if (!empty($ds_san_pham)) {
             foreach ($ds_san_pham as $sp) {
 				$m_khach_hang->Them_chi_tiet_don_hang($don_hang->ma_don_hang, $sp->ma_san_pham, $sp->so_luong, $sp->don_gia - ($sp->don_gia * $sp->chiet_khau / 100));
 			}
 
-			header("Location: /bakery_store/don_hang");
+			header("Location: /bakery_store/vnpay_pay.php?order_id=".$don_hang->ma_don_hang."&amount=".$don_hang->tong_gia."&order_desc=".$don_hang->ma_thanh_toan);
 			// Xóa biến session "giohang"
 			unset($_SESSION["giohang"]);
 			exit;
@@ -107,6 +112,18 @@ class C_don_hang
 		$m_don_hang->Thay_doi_trang_thai_don_hang(9, $trang_thai, $ma_don_hang);
 		return "Hủy thành công!";
 	}
+
+	function thanh_toan($ma_don_hang, $phuong_thuc) {
+
+		$ma_don_hang_check = str_replace("Q", "", $ma_don_hang);
+
+		$m_don_hang=new M_don_hang();
+
+		$m_don_hang->Thay_doi_trang_thai_thanh_toan($ma_don_hang_check, $phuong_thuc);
+
+		return "Thanh toán thành công!";
+	}
+	
 
 	function Hien_thi_don_hang($searchMaDonHang, $searchTenKhachHang, $searchMaKhachHang, $searchThoiGianDat, $searchThoiGianGiao, $searchStatusDropdown){
 		$m_don_hang=new M_don_hang();
@@ -164,6 +181,20 @@ class C_don_hang
 		return $ds_san_pham_gio_hang;
 	}
 
+	function trang_thai_thanh_toan($trang_thai) {
+		switch ($trang_thai) {
+			case 0:
+				echo "Chưa thanh toán";
+				break;
+			case 1:
+				echo "Đã thanh toán";
+				break;
+			default:
+				# code...
+				break;
+		}
+	}
+
 	function hien_thi_trang_thai($trang_thai){
 		switch ($trang_thai) {
 			case 1:
@@ -216,5 +247,11 @@ class C_don_hang
 				break;
 		} 
 	}
+
+	function generateRandomString($length = 6) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = str_shuffle($characters);
+        return substr($randomString, 0, $length);
+    }
 }
 ?>

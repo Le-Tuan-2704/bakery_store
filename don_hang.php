@@ -29,6 +29,12 @@ if(isset($_SESSION["ten_dang_nhap"]))
         return;
     }
 
+    if (isset($_POST["action"]) && $_POST["action"] == "thanh_toan") {
+        $res = $c_don_hang->thanh_toan($_POST["ma_don_hang"], $_POST["phuong_thuc"]);
+        echo json_encode($res);
+        return;
+    }
+
     if (isset($_GET["action"]) && $_GET["action"] == "search") {
 
         $searchMaDonHang = $_GET["searchMaDonHang"];

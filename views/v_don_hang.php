@@ -58,12 +58,14 @@
                     <p><strong>Họ Tên Người Nhận:</strong> <?php echo $oB->ho_ten_nguoi_nhan; ?></p>
                     <p><strong>Số Điện Thoại:</strong> <?php echo $oB->sdt_nguoi_nhan; ?></p>
                     <p><strong>Địa Chỉ Giao Hàng:</strong> <?php echo $oB->dia_diem_giao; ?></p>
+                    <p><strong>Trạng thái thanh toán:</strong> <?php echo $this->trang_thai_thanh_toan($oB->trang_thai_thanh_toan); ?></p>
                 </div>
                 <div class="col-md-6">
                     <p><strong>Ngày Đặt Hàng:</strong> <?php echo $oB->ngay_dat_hang; ?></p>
                     <p><strong>Ngày Giao Hàng:</strong> <?php echo $oB->ngay_giao_hang; ?></p>
                     <p><strong>Trạng Thái:</strong> <?php echo $this->hien_thi_trang_thai($oB->trang_thai); ?></p>
                     <p><strong>Tổng Giá:</strong> <?php echo number_format($oB->tong_gia); ?>&nbsp;đồng</p>
+                    <p><strong>Hình thức thanh toán:</strong> <?php echo $oB->hinh_thuc_thanh_toan; ?></p>
                 </div>
             </div>
             <div><p><strong>Ghi Chú:</strong> <?php echo $oB->ghi_chu; ?></p></div>

@@ -30,7 +30,10 @@
 						</div>
 					</div>
 				</div>
-
+                <p align="center">
+                <a href="gio_hang.php?func=xac_nhan" class="btn btn-primary">Xác nhận đơn</a>
+                <a href="xoa_gio_hang.php" class="btn btn-danger">Xóa giỏ hàng</a>
+        </p>
         <?php
             }
         } else {
@@ -39,10 +42,7 @@
         <?php
         }
         ?>
-        <p align="center">
-			<a href="gio_hang.php?func=xac_nhan" class="btn btn-primary">Xác nhận đơn</a>
-            <a href="xoa_gio_hang.php" class="btn btn-danger">Xóa giỏ hàng</a>
-        </p>
+
     </div>
 
     <div class="clearfix"> </div>

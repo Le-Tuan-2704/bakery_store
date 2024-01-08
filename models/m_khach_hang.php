@@ -27,14 +27,14 @@ class M_khach_hang extends database {
         return $this->pdo_execute($sql, [$ten_khach_hang, $dia_chi, $sdt, $gioi_tinh, $email, $username, $password, $so_tien]);
     }
 
-    function Them_hoa_don($ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $ngay_dat_hang, $ngay_giao_hang, $trang_thai, $tong_gia, $ghi_chu) {
+    function Them_hoa_don($ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $ngay_dat_hang, $ngay_giao_hang, $trang_thai, $tong_gia, $ghi_chu, $trang_thai_thanh_toan, $ma_thanh_toan, $hinh_thuc_thanh_toan) {
 
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $dateNow = date("Y-m-d H:i:s");
 
-        $sql = "INSERT INTO bk_don_hang (ma_khach_hang, ho_ten_nguoi_nhan, sdt_nguoi_nhan, dia_diem_giao, ngay_dat_hang, ngay_giao_hang, trang_thai, tong_gia, ghi_chu) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO bk_don_hang (ma_khach_hang, ho_ten_nguoi_nhan, sdt_nguoi_nhan, dia_diem_giao, ngay_dat_hang, ngay_giao_hang, trang_thai, tong_gia, ghi_chu, trang_thai_thanh_toan, ma_thanh_toan, hinh_thuc_thanh_toan) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
-        $this->pdo_execute($sql,[$ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $dateNow, $ngay_giao_hang, $trang_thai, $tong_gia, $ghi_chu]);
+        $this->pdo_execute($sql,[$ma_khach_hang, $ho_ten_nguoi_nhan, $sdt_nguoi_nhan, $dia_diem_giao, $dateNow, $ngay_giao_hang, $trang_thai, $tong_gia, $ghi_chu, $trang_thai_thanh_toan, $ma_thanh_toan, $hinh_thuc_thanh_toan]);
 
         $sql_select = "SELECT * FROM bk_don_hang WHERE ma_khach_hang = ? AND ngay_dat_hang = ?";
 
@@ -46,5 +46,7 @@ class M_khach_hang extends database {
         
         return $this->pdo_execute($sql,[$ma_don_hang, $ma_san_pham, $so_luong, $don_gia]);
     }
+
+    
 }
 ?>
